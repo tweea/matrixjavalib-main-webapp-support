@@ -1,5 +1,4 @@
 /*
- * $Id: SystemInitializeListener.java 894 2014-01-22 11:23:56Z tweea@263.net $
  * Copyright(C) 2008 Matrix
  * All right reserved.
  */
