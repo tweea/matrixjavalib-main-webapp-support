@@ -17,10 +17,9 @@ import net.matrix.app.SystemContext;
 import net.matrix.app.SystemController;
 import net.matrix.app.message.CodedMessageDefinitionLoader;
 
+// TODO 模仿 WebApplicationContextUtils
 /**
  * 系统初始化监听器，注册在 web.xml 中被容器调用初始化、启动和停止。
- * 
- * @since 2005-11-16
  */
 public class SystemInitializeListener
 	implements ServletContextListener {
