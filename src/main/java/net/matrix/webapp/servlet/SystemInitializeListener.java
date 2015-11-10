@@ -12,12 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.matrix.app.DefaultSystemController;
-import net.matrix.app.GlobalSystemContext;
 import net.matrix.app.SystemContext;
 import net.matrix.app.SystemController;
 import net.matrix.app.message.CodedMessageDefinitionLoader;
+import net.matrix.webapp.DefaultWebSystemContext;
 
-// TODO 模仿 WebApplicationContextUtils
 /**
  * 系统初始化监听器，注册在 web.xml 中被容器调用初始化、启动和停止。
  */
@@ -42,14 +41,16 @@ public class SystemInitializeListener
 	public void contextInitialized(final ServletContextEvent sce) {
 		servletContext = sce.getServletContext();
 
-		// 默认与全局系统环境关联
-		context = GlobalSystemContext.get();
+		LOG.info("{} 初始化开始", servletContext.getServletContextName());
+
+		// 系统环境
+		context = new DefaultWebSystemContext(servletContext);
+		context.registerObject(ServletContext.class, servletContext);
 
 		// 加载消息
 		loadMessageDefinitions();
 
 		// 初始化系统环境
-		context.registerObject(ServletContext.class, servletContext);
 		setupResourceLoader();
 		loadConfig();
 
