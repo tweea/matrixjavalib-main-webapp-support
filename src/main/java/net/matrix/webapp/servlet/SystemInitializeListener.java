@@ -38,12 +38,6 @@ public class SystemInitializeListener
 	 */
 	protected SystemContext context;
 
-	/**
-	 * 默认构造器。
-	 */
-	public SystemInitializeListener() {
-	}
-
 	@Override
 	public void contextInitialized(final ServletContextEvent sce) {
 		servletContext = sce.getServletContext();
@@ -66,7 +60,7 @@ public class SystemInitializeListener
 		controller.init();
 		controller.start();
 
-		LOG.info(servletContext.getServletContextName() + " 初始化完成");
+		LOG.info("{} 初始化完成", servletContext.getServletContextName());
 	}
 
 	/**
