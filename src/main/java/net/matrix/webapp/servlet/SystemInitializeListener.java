@@ -10,10 +10,12 @@ import javax.servlet.ServletContextListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import net.matrix.app.DefaultSystemController;
 import net.matrix.app.SystemController;
 import net.matrix.app.message.CodedMessageDefinitionLoader;
+import net.matrix.util.SLF4Js;
 import net.matrix.webapp.DefaultWebSystemContext;
 import net.matrix.webapp.WebSystemContext;
 import net.matrix.webapp.WebSystemContexts;
@@ -43,6 +45,11 @@ public class SystemInitializeListener
 		servletContext = sce.getServletContext();
 
 		LOG.info("{} 初始化开始", servletContext.getServletContextName());
+
+		// JUL 配置
+		SLF4Js.bridgeJUL();
+		// 加载 jar 包中的消息定义
+		CodedMessageDefinitionLoader.loadDefinitions(new PathMatchingResourcePatternResolver());
 
 		// 初始化系统环境
 		context = new DefaultWebSystemContext(servletContext);
@@ -77,7 +84,7 @@ public class SystemInitializeListener
 	 * 加载消息定义。
 	 */
 	protected void loadMessageDefinitions() {
-		CodedMessageDefinitionLoader.loadDefinitions(context.getResourcePatternResolver());
+		// 空实现
 	}
 
 	/**
