@@ -44,16 +44,16 @@ public class SystemInitializeListener
 
 		LOG.info("{} 初始化开始", servletContext.getServletContextName());
 
-		// 系统环境
+		// 初始化系统环境
 		context = new DefaultWebSystemContext(servletContext);
 		context.registerObject(ServletContext.class, servletContext);
 		WebSystemContexts.setWebSystemContext(servletContext, context);
 
-		// 加载消息
-		loadMessageDefinitions();
-
-		// 初始化系统环境
+		// 配置资源加载
 		setupResourceLoader();
+		// 加载消息定义
+		loadMessageDefinitions();
+		// 加载配置
 		loadConfig();
 
 		// 初始化控制器
@@ -67,17 +67,17 @@ public class SystemInitializeListener
 	}
 
 	/**
-	 * 加载消息定义。
-	 */
-	protected void loadMessageDefinitions() {
-		CodedMessageDefinitionLoader.loadDefinitions(context.getResourcePatternResolver());
-	}
-
-	/**
 	 * 装配系统资源加载器。
 	 */
 	protected void setupResourceLoader() {
 		// 空实现
+	}
+
+	/**
+	 * 加载消息定义。
+	 */
+	protected void loadMessageDefinitions() {
+		CodedMessageDefinitionLoader.loadDefinitions(context.getResourcePatternResolver());
 	}
 
 	/**
