@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import net.matrix.app.DefaultSystemController;
 import net.matrix.app.SystemController;
 import net.matrix.app.message.CodedMessageDefinitionLoader;
 import net.matrix.util.SLF4Js;
@@ -64,9 +63,7 @@ public class SystemInitializeListener
 		loadConfig();
 
 		// 初始化控制器
-		SystemController controller = getController();
-		controller.setContext(context);
-		context.setController(controller);
+		SystemController controller = context.getController();
 		controller.init();
 		controller.start();
 
@@ -92,15 +89,6 @@ public class SystemInitializeListener
 	 */
 	protected void loadConfig() {
 		// 空实现
-	}
-
-	/**
-	 * 初始化系统控制器。
-	 * 
-	 * @return 系统控制器
-	 */
-	protected SystemController getController() {
-		return new DefaultSystemController();
 	}
 
 	@Override

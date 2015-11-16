@@ -22,6 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.matrix.app.DefaultSystemContext;
+import net.matrix.app.DefaultSystemController;
+import net.matrix.app.SystemController;
 
 /**
  * 默认的 Web 系统环境。
@@ -98,6 +100,15 @@ public class DefaultWebSystemContext
 			}
 		}
 		return config;
+	}
+
+	@Override
+	public SystemController getController() {
+		if (controller == null) {
+			controller = new DefaultSystemController();
+			controller.setContext(this);
+		}
+		return controller;
 	}
 
 	@Override
