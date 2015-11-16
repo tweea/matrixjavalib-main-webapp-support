@@ -10,7 +10,6 @@ import javax.servlet.ServletContextListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import net.matrix.app.SystemController;
 import net.matrix.app.message.CodedMessageDefinitionLoader;
@@ -48,7 +47,7 @@ public class SystemInitializeListener
 		// JUL 配置
 		SLF4Js.bridgeJUL();
 		// 加载 jar 包中的消息定义
-		CodedMessageDefinitionLoader.loadDefinitions(new PathMatchingResourcePatternResolver());
+		CodedMessageDefinitionLoader.loadBuiltinDefinitions();
 
 		// 初始化系统环境
 		context = new DefaultWebSystemContext(servletContext);
