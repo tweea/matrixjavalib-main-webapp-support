@@ -17,6 +17,7 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.ConfigurationRuntimeException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.tree.OverrideCombiner;
+import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,11 @@ public class DefaultWebSystemContext
 	 * 系统配置位置的 Servlet 上下文参数名。
 	 */
 	private static final String CONFIG_LOCATION_PARAM = "systemConfigLocation";
+
+	/**
+	 * 系统控制器类名的 Servlet 上下文参数名。
+	 */
+	private static final String CONTROLLER_CLASS_PARAM = "systemControllerClass";
 
 	/**
 	 * Servlet 上下文。
@@ -105,7 +111,17 @@ public class DefaultWebSystemContext
 	@Override
 	public SystemController getController() {
 		if (controller == null) {
-			controller = new DefaultSystemController();
+			String controllerClassParam = servletContext.getInitParameter(CONTROLLER_CLASS_PARAM);
+			if (controllerClassParam == null) {
+				controller = new DefaultSystemController();
+			} else {
+				try {
+					Class<?> controllerClass = ClassUtils.getClass(controllerClassParam);
+					controller = (SystemController) controllerClass.newInstance();
+				} catch (ReflectiveOperationException e) {
+					throw new ConfigurationRuntimeException("控制器类 " + controllerClassParam + " 实例化失败", e);
+				}
+			}
 			controller.setContext(this);
 		}
 		return controller;
