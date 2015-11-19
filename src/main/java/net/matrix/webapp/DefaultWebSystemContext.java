@@ -4,7 +4,7 @@
  */
 package net.matrix.webapp;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +21,8 @@ import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 import net.matrix.app.DefaultSystemContext;
 import net.matrix.app.DefaultSystemController;
@@ -60,6 +62,14 @@ public class DefaultWebSystemContext
 	}
 
 	@Override
+	public ResourceLoader getResourceLoader() {
+		if (resourceLoader == null) {
+			resourceLoader = new WebSystemResourceLoader(servletContext);
+		}
+		return resourceLoader;
+	}
+
+	@Override
 	public Configuration getConfig() {
 		if (config == null) {
 			String configLocationsParam = servletContext.getInitParameter(CONFIG_LOCATION_PARAM);
@@ -75,21 +85,18 @@ public class DefaultWebSystemContext
 				if (StringUtils.isBlank(configLocation)) {
 					continue;
 				}
-				String configPath = servletContext.getRealPath(configLocation);
-				if (configPath == null) {
-					LOG.info("系统配置文件 {} 不存在", configLocation);
-					continue;
-				}
-				File configFile = new File(configPath);
-				if (!configFile.exists()) {
-					LOG.info("系统配置文件 {} 不存在", configFile);
+				Resource configResource = getResourceLoader().getResource(configLocation);
+				if (!configResource.exists()) {
+					LOG.info("系统配置文件 {} 不存在", configResource);
 					continue;
 				}
 				try {
-					configList.add(new PropertiesConfiguration(configFile));
-					LOG.info("系统配置文件 {} 加载完成", configFile);
+					configList.add(new PropertiesConfiguration(configResource.getURL()));
+					LOG.info("系统配置文件 {} 加载完成", configResource);
+				} catch (IOException e) {
+					throw new ConfigurationRuntimeException("系统配置文件 " + configResource + " 加载失败", e);
 				} catch (ConfigurationException e) {
-					throw new ConfigurationRuntimeException("系统配置文件 " + configFile + " 加载失败", e);
+					throw new ConfigurationRuntimeException("系统配置文件 " + configResource + " 加载失败", e);
 				}
 			}
 			if (configList.isEmpty()) {
