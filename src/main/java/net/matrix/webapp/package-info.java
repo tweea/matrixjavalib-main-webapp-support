@@ -3,6 +3,6 @@
  * All right reserved.
  */
 /**
- * Web 系统
+ * Web 应用系统。
  */
 package net.matrix.webapp;

@@ -21,7 +21,7 @@ public final class WebSystemContexts {
     }
 
     /**
-     * Set the root {@code WebSystemContext} for this web app.
+     * Set the root {@link WebSystemContext} for this web app.
      * 
      * @param sc
      *     ServletContext to set the web application context for
@@ -33,7 +33,7 @@ public final class WebSystemContexts {
     }
 
     /**
-     * Set a custom {@code WebSystemContext} for this web app.
+     * Set a custom {@link WebSystemContext} for this web app.
      * 
      * @param sc
      *     ServletContext to set the web application context for
@@ -47,7 +47,7 @@ public final class WebSystemContexts {
     }
 
     /**
-     * Find the root {@code WebSystemContext} for this web app.
+     * Find the root {@link WebSystemContext} for this web app.
      * <p>
      * Will rethrow an exception that happened on root context startup,
      * to differentiate between a failed context startup and no context at all.
@@ -68,7 +68,7 @@ public final class WebSystemContexts {
     }
 
     /**
-     * Find the root {@code WebSystemContext} for this web app.
+     * Find the root {@link WebSystemContext} for this web app.
      * <p>
      * Will rethrow an exception that happened on root context startup,
      * to differentiate between a failed context startup and no context at all.
@@ -82,7 +82,7 @@ public final class WebSystemContexts {
     }
 
     /**
-     * Find a custom {@code WebSystemContext} for this web app.
+     * Find a custom {@link WebSystemContext} for this web app.
      * 
      * @param sc
      *     ServletContext to find the web application context for
@@ -111,9 +111,9 @@ public final class WebSystemContexts {
     }
 
     /**
-     * Find a unique {@code WebSystemContext} for this web app: either the
-     * root web app context (preferred) or a unique {@code WebSystemContext}
-     * among the registered {@code ServletContext} attributes.
+     * Find a unique {@link WebSystemContext} for this web app: either the
+     * root web app context (preferred) or a unique {@link WebSystemContext}
+     * among the registered {@link ServletContext} attributes.
      * 
      * @param sc
      *     ServletContext to find the web application context for

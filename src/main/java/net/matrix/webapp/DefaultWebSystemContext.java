@@ -56,7 +56,7 @@ public class DefaultWebSystemContext
     protected final ServletContext servletContext;
 
     /**
-     * 默认构造器。
+     * 构造空实例。
      */
     public DefaultWebSystemContext(final ServletContext servletContext) {
         this.servletContext = servletContext;

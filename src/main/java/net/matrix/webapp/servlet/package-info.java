@@ -3,6 +3,6 @@
  * All right reserved.
  */
 /**
- * Base 系统的 Servlet
+ * Web 应用系统 Servlet。
  */
 package net.matrix.webapp.servlet;
