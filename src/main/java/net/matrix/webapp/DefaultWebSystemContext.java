@@ -10,13 +10,14 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.configuration.AbstractConfiguration;
-import org.apache.commons.configuration.CombinedConfiguration;
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.ConfigurationRuntimeException;
-import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.configuration.tree.OverrideCombiner;
+import org.apache.commons.configuration2.AbstractConfiguration;
+import org.apache.commons.configuration2.CombinedConfiguration;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.configuration2.ex.ConfigurationRuntimeException;
+import org.apache.commons.configuration2.io.FileHandler;
+import org.apache.commons.configuration2.tree.OverrideCombiner;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -91,7 +92,10 @@ public class DefaultWebSystemContext
                     continue;
                 }
                 try {
-                    configList.add(new PropertiesConfiguration(configResource.getURL()));
+                    PropertiesConfiguration memberConfig = new PropertiesConfiguration();
+                    FileHandler fileHandler = new FileHandler(memberConfig);
+                    fileHandler.load(configResource.getInputStream());
+                    configList.add(memberConfig);
                     LOG.info("系统配置文件 {} 加载完成", configResource);
                 } catch (IOException e) {
                     throw new ConfigurationRuntimeException("系统配置文件 " + configResource + " 加载失败", e);
