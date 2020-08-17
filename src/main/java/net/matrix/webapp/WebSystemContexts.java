@@ -58,8 +58,7 @@ public final class WebSystemContexts {
      * @throws IllegalStateException
      *     if the root WebSystemContext could not be found
      */
-    public static WebSystemContext getRequiredWebSystemContext(final ServletContext sc)
-        throws IllegalStateException {
+    public static WebSystemContext getRequiredWebSystemContext(final ServletContext sc) {
         WebSystemContext wsc = getWebSystemContext(sc);
         if (wsc == null) {
             throw new IllegalStateException("No WebSystemContext found");

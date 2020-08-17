@@ -97,9 +97,7 @@ public class DefaultWebSystemContext
                     fileHandler.load(configResource.getInputStream());
                     configList.add(memberConfig);
                     LOG.info("系统配置文件 {} 加载完成", configResource);
-                } catch (IOException e) {
-                    throw new ConfigurationRuntimeException("系统配置文件 " + configResource + " 加载失败", e);
-                } catch (ConfigurationException e) {
+                } catch (IOException | ConfigurationException e) {
                     throw new ConfigurationRuntimeException("系统配置文件 " + configResource + " 加载失败", e);
                 }
             }
