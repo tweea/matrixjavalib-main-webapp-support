@@ -47,8 +47,7 @@ public final class WebSystemContexts {
     }
 
     /**
-     * Find the root {@link WebSystemContext} for this web app.
-     * <p>
+     * Find the root {@link WebSystemContext} for this web app.<br>
      * Will rethrow an exception that happened on root context startup,
      * to differentiate between a failed context startup and no context at all.
      * 
@@ -67,8 +66,7 @@ public final class WebSystemContexts {
     }
 
     /**
-     * Find the root {@link WebSystemContext} for this web app.
-     * <p>
+     * Find the root {@link WebSystemContext} for this web app.<br>
      * Will rethrow an exception that happened on root context startup,
      * to differentiate between a failed context startup and no context at all.
      * 
