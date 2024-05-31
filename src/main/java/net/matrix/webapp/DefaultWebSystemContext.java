@@ -5,6 +5,7 @@
 package net.matrix.webapp;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import org.apache.commons.configuration2.io.FileHandler;
 import org.apache.commons.configuration2.tree.OverrideCombiner;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -126,7 +128,8 @@ public class DefaultWebSystemContext
             } else {
                 try {
                     Class<?> controllerClass = ClassUtils.getClass(controllerClassParam);
-                    controller = (SystemController) controllerClass.newInstance();
+                    Constructor<?> controllerConstructor = ConstructorUtils.getAccessibleConstructor(controllerClass);
+                    controller = (SystemController) controllerConstructor.newInstance();
                 } catch (ReflectiveOperationException e) {
                     throw new ConfigurationRuntimeException("控制器类 " + controllerClassParam + " 实例化失败", e);
                 }

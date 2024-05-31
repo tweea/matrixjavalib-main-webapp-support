@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import net.matrix.app.SystemController;
 import net.matrix.app.message.CodedMessageDefinitionLoader;
-import net.matrix.util.SLF4Js;
+import net.matrix.org.slf4j.SLF4Jmx;
 import net.matrix.webapp.DefaultWebSystemContext;
 import net.matrix.webapp.WebSystemContext;
 import net.matrix.webapp.WebSystemContexts;
@@ -45,7 +45,7 @@ public class SystemInitializeListener
         LOG.info("{} 初始化开始", servletContext.getServletContextName());
 
         // JUL 配置
-        SLF4Js.bridgeJUL();
+        SLF4Jmx.bridgeJUL();
         // 加载 jar 包中的消息定义
         CodedMessageDefinitionLoader.loadBuiltinDefinitions();
 
