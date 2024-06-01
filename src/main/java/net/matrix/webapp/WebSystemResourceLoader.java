@@ -1,5 +1,5 @@
 /*
- * 版权所有 2020 Matrix。
+ * 版权所有 2024 Matrix。
  * 保留所有权利。
  */
 package net.matrix.webapp;
@@ -21,14 +21,14 @@ public class WebSystemResourceLoader
      * Create a new WebSystemResourceLoader.
      * 
      * @param servletContext
-     *     the ServletContext to load resources with
+     *     the ServletContext to load resources with.
      */
-    public WebSystemResourceLoader(final ServletContext servletContext) {
+    public WebSystemResourceLoader(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 
     @Override
-    protected Resource getResourceByPath(final String path) {
+    protected Resource getResourceByPath(String path) {
         String realPath = servletContext.getRealPath(path);
         if (realPath == null) {
             return super.getResourceByPath(path);
