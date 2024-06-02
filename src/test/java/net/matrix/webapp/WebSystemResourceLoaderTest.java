@@ -15,6 +15,6 @@ public class WebSystemResourceLoaderTest {
         MockServletContext context = new MockServletContext();
         WebSystemResourceLoader resourceLoader = new WebSystemResourceLoader(context);
 
-        assertThat(resourceLoader.getResourceByPath("sysconfig.cfg")).isNotNull();
+        assertThat(resourceLoader.getResourceByPath("/WEB-INF/sysconfig.cfg")).isNotNull();
     }
 }

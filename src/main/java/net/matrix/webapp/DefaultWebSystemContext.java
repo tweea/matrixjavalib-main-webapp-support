@@ -1,5 +1,5 @@
 /*
- * 版权所有 2020 Matrix。
+ * 版权所有 2024 Matrix。
  * 保留所有权利。
  */
 package net.matrix.webapp;
@@ -30,9 +30,10 @@ import org.springframework.core.io.ResourceLoader;
 import net.matrix.app.DefaultSystemContext;
 import net.matrix.app.DefaultSystemController;
 import net.matrix.app.SystemController;
+import net.matrix.text.ResourceBundleMessageFormatter;
 
 /**
- * 默认的 Web 系统环境。
+ * 默认的基于 Web 的系统环境。
  */
 public class DefaultWebSystemContext
     extends DefaultSystemContext
@@ -43,9 +44,19 @@ public class DefaultWebSystemContext
     private static final Logger LOG = LoggerFactory.getLogger(DefaultWebSystemContext.class);
 
     /**
+     * 区域相关资源。
+     */
+    private static final ResourceBundleMessageFormatter RBMF = new ResourceBundleMessageFormatter(DefaultWebSystemContext.class).useCurrentLocale();
+
+    /**
      * 系统配置位置的 Servlet 上下文参数名。
      */
     private static final String CONFIG_LOCATION_PARAM = "systemConfigLocation";
+
+    /**
+     * 默认的系统配置位置。
+     */
+    private static final String DEFAULT_CONFIG_LOCATION = "/WEB-INF/sysconfig.cfg,/WEB-INF/sysconfig.dev.cfg";
 
     /**
      * 系统控制器类名的 Servlet 上下文参数名。
@@ -58,9 +69,9 @@ public class DefaultWebSystemContext
     protected final ServletContext servletContext;
 
     /**
-     * 构造空实例。
+     * 构造器。
      */
-    public DefaultWebSystemContext(final ServletContext servletContext) {
+    public DefaultWebSystemContext(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 
@@ -75,11 +86,7 @@ public class DefaultWebSystemContext
     @Override
     public Configuration getConfig() {
         if (config == null) {
-            String configLocationsParam = servletContext.getInitParameter(CONFIG_LOCATION_PARAM);
-            if (configLocationsParam == null) {
-                configLocationsParam = "/WEB-INF/sysconfig.cfg,/WEB-INF/sysconfig.dev.cfg";
-            }
-
+            String configLocationsParam = StringUtils.defaultIfBlank(servletContext.getInitParameter(CONFIG_LOCATION_PARAM), DEFAULT_CONFIG_LOCATION);
             String[] configLocations = StringUtils.split(configLocationsParam, ",; \t\n");
             configLocations = StringUtils.stripAll(configLocations);
 
@@ -88,23 +95,27 @@ public class DefaultWebSystemContext
                 if (StringUtils.isBlank(configLocation)) {
                     continue;
                 }
+
                 Resource configResource = getResourceLoader().getResource(configLocation);
                 if (!configResource.exists()) {
-                    LOG.info("系统配置文件 {} 不存在", configResource);
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug(RBMF.get("未找到系统配置文件 {}"), configResource);
+                    }
                     continue;
                 }
+
                 try {
                     PropertiesConfiguration memberConfig = new PropertiesConfiguration();
                     FileHandler fileHandler = new FileHandler(memberConfig);
                     fileHandler.load(configResource.getInputStream());
                     configList.add(memberConfig);
-                    LOG.info("系统配置文件 {} 加载完成", configResource);
+                    LOG.info(RBMF.get("系统配置文件 {} 加载完成"), configResource);
                 } catch (IOException | ConfigurationException e) {
-                    throw new ConfigurationRuntimeException("系统配置文件 " + configResource + " 加载失败", e);
+                    throw new ConfigurationRuntimeException(RBMF.format("系统配置文件 {0} 加载失败", configResource), e);
                 }
             }
             if (configList.isEmpty()) {
-                LOG.info("系统配置文件未找到");
+                LOG.info(RBMF.get("未加载系统配置文件"));
                 config = new PropertiesConfiguration();
             } else if (configList.size() == 1) {
                 config = configList.get(0);
@@ -131,7 +142,7 @@ public class DefaultWebSystemContext
                     Constructor<?> controllerConstructor = ConstructorUtils.getAccessibleConstructor(controllerClass);
                     controller = (SystemController) controllerConstructor.newInstance();
                 } catch (ReflectiveOperationException e) {
-                    throw new ConfigurationRuntimeException("控制器类 " + controllerClassParam + " 实例化失败", e);
+                    throw new ConfigurationRuntimeException(RBMF.format("控制器类 {0} 实例化失败", controllerClassParam), e);
                 }
             }
             controller.setContext(this);
