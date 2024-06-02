@@ -1,5 +1,5 @@
 /*
- * 版权所有 2020 Matrix。
+ * 版权所有 2024 Matrix。
  * 保留所有权利。
  */
 package net.matrix.webapp.servlet;
@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import net.matrix.app.SystemController;
 import net.matrix.app.message.CodedMessageDefinitionLoader;
 import net.matrix.org.slf4j.SLF4Jmx;
+import net.matrix.text.ResourceBundleMessageFormatter;
 import net.matrix.webapp.DefaultWebSystemContext;
 import net.matrix.webapp.WebSystemContext;
 import net.matrix.webapp.WebSystemContextMx;
@@ -29,20 +30,25 @@ public class SystemInitializeListener
     private static final Logger LOG = LoggerFactory.getLogger(SystemInitializeListener.class);
 
     /**
-     * 系统的 Servlet 上下文。
+     * 区域相关资源。
+     */
+    private static final ResourceBundleMessageFormatter RBMF = new ResourceBundleMessageFormatter(SystemInitializeListener.class).useCurrentLocale();
+
+    /**
+     * Servlet 上下文。
      */
     protected ServletContext servletContext;
 
     /**
-     * 关联的系统环境。
+     * 系统环境。
      */
     protected WebSystemContext context;
 
     @Override
-    public void contextInitialized(final ServletContextEvent sce) {
+    public void contextInitialized(ServletContextEvent sce) {
         servletContext = sce.getServletContext();
 
-        LOG.info("{} 初始化开始", servletContext.getServletContextName());
+        LOG.info(RBMF.get("系统环境 {} 初始化开始"), servletContext.getServletContextName());
 
         // JUL 配置
         SLF4Jmx.bridgeJUL();
@@ -66,7 +72,7 @@ public class SystemInitializeListener
         controller.init();
         controller.start();
 
-        LOG.info("{} 初始化完成", servletContext.getServletContextName());
+        LOG.info(RBMF.get("系统环境 {} 初始化完成"), servletContext.getServletContextName());
     }
 
     /**
@@ -91,7 +97,7 @@ public class SystemInitializeListener
     }
 
     @Override
-    public void contextDestroyed(final ServletContextEvent sce) {
+    public void contextDestroyed(ServletContextEvent sce) {
         context.getController().stop();
     }
 }
