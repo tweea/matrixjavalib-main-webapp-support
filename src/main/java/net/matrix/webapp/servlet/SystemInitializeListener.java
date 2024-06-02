@@ -16,7 +16,7 @@ import net.matrix.app.message.CodedMessageDefinitionLoader;
 import net.matrix.org.slf4j.SLF4Jmx;
 import net.matrix.webapp.DefaultWebSystemContext;
 import net.matrix.webapp.WebSystemContext;
-import net.matrix.webapp.WebSystemContexts;
+import net.matrix.webapp.WebSystemContextMx;
 
 /**
  * 系统初始化监听器，注册在 web.xml 中被容器调用初始化、启动和停止。
@@ -52,7 +52,7 @@ public class SystemInitializeListener
         // 初始化系统环境
         context = new DefaultWebSystemContext(servletContext);
         context.registerObject(ServletContext.class, servletContext);
-        WebSystemContexts.setWebSystemContext(servletContext, context);
+        WebSystemContextMx.setWebSystemContext(servletContext, context);
 
         // 配置资源加载
         setupResourceLoader();
