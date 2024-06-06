@@ -11,9 +11,9 @@ import org.springframework.mock.web.MockServletContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SystemInitializeListenerTest {
+class SystemInitializeListenerTest {
     @Test
-    public void testContextInitialized() {
+    void testContextInitialized() {
         MockServletContext servletContext = new MockServletContext();
         SystemInitializeListener listener = new SystemInitializeListener();
 

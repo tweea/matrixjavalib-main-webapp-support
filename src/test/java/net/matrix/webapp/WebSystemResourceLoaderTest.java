@@ -9,9 +9,9 @@ import org.springframework.mock.web.MockServletContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WebSystemResourceLoaderTest {
+class WebSystemResourceLoaderTest {
     @Test
-    public void testGetResourceByPath() {
+    void testGetResourceByPath() {
         MockServletContext context = new MockServletContext();
         WebSystemResourceLoader resourceLoader = new WebSystemResourceLoader(context);
 

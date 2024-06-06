@@ -13,9 +13,9 @@ import net.matrix.app.SystemController;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DefaultWebSystemContextTest {
+class DefaultWebSystemContextTest {
     @Test
-    public void testGetResourceLoader() {
+    void testGetResourceLoader() {
         MockServletContext servletContext = new MockServletContext();
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
 
@@ -23,7 +23,7 @@ public class DefaultWebSystemContextTest {
     }
 
     @Test
-    public void testGetConfig() {
+    void testGetConfig() {
         MockServletContext servletContext = new MockServletContext();
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
 
@@ -34,7 +34,7 @@ public class DefaultWebSystemContextTest {
     }
 
     @Test
-    public void testGetConfig2() {
+    void testGetConfig2() {
         MockServletContext servletContext = new MockServletContext();
         servletContext.setInitParameter("systemConfigLocation", "/WEB-INF/sysconfig.cfg,/WEB-INF/sysconfig2.cfg");
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
@@ -46,7 +46,7 @@ public class DefaultWebSystemContextTest {
     }
 
     @Test
-    public void testGetController() {
+    void testGetController() {
         MockServletContext servletContext = new MockServletContext();
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
 
@@ -56,7 +56,7 @@ public class DefaultWebSystemContextTest {
     }
 
     @Test
-    public void testGetController2() {
+    void testGetController2() {
         MockServletContext servletContext = new MockServletContext();
         servletContext.setInitParameter("systemControllerClass", TestController.class.getName());
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
@@ -66,7 +66,7 @@ public class DefaultWebSystemContextTest {
         assertThat(controller.getContext()).isSameAs(context);
     }
 
-    public static class TestController
+    static class TestController
         extends DefaultSystemController {
     }
 }

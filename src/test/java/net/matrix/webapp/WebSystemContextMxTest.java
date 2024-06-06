@@ -9,9 +9,9 @@ import org.springframework.mock.web.MockServletContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WebSystemContextMxTest {
+class WebSystemContextMxTest {
     @Test
-    public void testSetWebSystemContext() {
+    void testSetWebSystemContext() {
         MockServletContext servletContext = new MockServletContext();
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
 
@@ -20,7 +20,7 @@ public class WebSystemContextMxTest {
     }
 
     @Test
-    public void testSetWebSystemContext_attributeName() {
+    void testSetWebSystemContext_attributeName() {
         MockServletContext servletContext = new MockServletContext();
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
 
@@ -29,7 +29,7 @@ public class WebSystemContextMxTest {
     }
 
     @Test
-    public void testGetRequiredWebSystemContext() {
+    void testGetRequiredWebSystemContext() {
         MockServletContext servletContext = new MockServletContext();
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
         WebSystemContextMx.setWebSystemContext(servletContext, context);
@@ -38,7 +38,7 @@ public class WebSystemContextMxTest {
     }
 
     @Test
-    public void testGetWebSystemContext() {
+    void testGetWebSystemContext() {
         MockServletContext servletContext = new MockServletContext();
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
         WebSystemContextMx.setWebSystemContext(servletContext, context);
@@ -47,7 +47,7 @@ public class WebSystemContextMxTest {
     }
 
     @Test
-    public void testGetWebSystemContext_attributeName() {
+    void testGetWebSystemContext_attributeName() {
         MockServletContext servletContext = new MockServletContext();
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
         WebSystemContextMx.setWebSystemContext(servletContext, "test", context);
@@ -56,7 +56,7 @@ public class WebSystemContextMxTest {
     }
 
     @Test
-    public void testFindWebSystemContext() {
+    void testFindWebSystemContext() {
         MockServletContext servletContext = new MockServletContext();
         DefaultWebSystemContext context = new DefaultWebSystemContext(servletContext);
         WebSystemContextMx.setWebSystemContext(servletContext, "test", context);
