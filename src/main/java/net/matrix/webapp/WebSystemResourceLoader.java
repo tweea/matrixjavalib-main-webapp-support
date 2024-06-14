@@ -4,6 +4,7 @@
  */
 package net.matrix.webapp;
 
+import javax.annotation.Nonnull;
 import javax.servlet.ServletContext;
 
 import org.springframework.core.io.DefaultResourceLoader;
@@ -15,6 +16,7 @@ import org.springframework.core.io.Resource;
  */
 public class WebSystemResourceLoader
     extends DefaultResourceLoader {
+    @Nonnull
     private final ServletContext servletContext;
 
     /**
@@ -23,7 +25,7 @@ public class WebSystemResourceLoader
      * @param servletContext
      *     the ServletContext to load resources with.
      */
-    public WebSystemResourceLoader(ServletContext servletContext) {
+    public WebSystemResourceLoader(@Nonnull ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 

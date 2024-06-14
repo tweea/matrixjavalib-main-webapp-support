@@ -9,6 +9,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.servlet.ServletContext;
 
 import org.apache.commons.configuration2.AbstractConfiguration;
@@ -66,12 +67,13 @@ public class DefaultWebSystemContext
     /**
      * Servlet 上下文。
      */
+    @Nonnull
     protected final ServletContext servletContext;
 
     /**
      * 构造器。
      */
-    public DefaultWebSystemContext(ServletContext servletContext) {
+    public DefaultWebSystemContext(@Nonnull ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 

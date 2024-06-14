@@ -4,6 +4,9 @@
  */
 package net.matrix.webapp;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.concurrent.ThreadSafe;
 import javax.servlet.ServletContext;
 
 import net.matrix.java.lang.UncheckedException;
@@ -13,6 +16,7 @@ import net.matrix.text.ResourceBundleMessageFormatter;
 /**
  * 基于 Web 的系统环境工具。
  */
+@ThreadSafe
 public final class WebSystemContextMx {
     /**
      * 区域相关资源。
@@ -38,7 +42,7 @@ public final class WebSystemContextMx {
      * @param context
      *     the root WebSystemContext for this web app, or {@code null} for remove.
      */
-    public static void setWebSystemContext(ServletContext servletContext, WebSystemContext context) {
+    public static void setWebSystemContext(@Nonnull ServletContext servletContext, @Nullable WebSystemContext context) {
         setWebSystemContext(servletContext, ROOT_WEB_SYSTEM_CONTEXT_ATTRIBUTE, context);
     }
 
@@ -52,7 +56,7 @@ public final class WebSystemContextMx {
      * @param context
      *     the desired WebSystemContext for this web app, or {@code null} for remove.
      */
-    public static void setWebSystemContext(ServletContext servletContext, String attributeName, WebSystemContext context) {
+    public static void setWebSystemContext(@Nonnull ServletContext servletContext, @Nonnull String attributeName, @Nullable WebSystemContext context) {
         servletContext.setAttribute(attributeName, context);
     }
 
@@ -67,7 +71,8 @@ public final class WebSystemContextMx {
      * @throws IllegalStateException
      *     if the root WebSystemContext could not be found.
      */
-    public static WebSystemContext getRequiredWebSystemContext(ServletContext servletContext) {
+    @Nonnull
+    public static WebSystemContext getRequiredWebSystemContext(@Nonnull ServletContext servletContext) {
         WebSystemContext context = getWebSystemContext(servletContext);
         if (context == null) {
             throw new IllegalStateException(RBMF.get("No WebSystemContext found"));
@@ -84,7 +89,8 @@ public final class WebSystemContextMx {
      *     ServletContext to find the web application context for.
      * @return the root WebSystemContext for this web app, or {@code null} if none.
      */
-    public static WebSystemContext getWebSystemContext(ServletContext servletContext) {
+    @Nullable
+    public static WebSystemContext getWebSystemContext(@Nonnull ServletContext servletContext) {
         return getWebSystemContext(servletContext, ROOT_WEB_SYSTEM_CONTEXT_ATTRIBUTE);
     }
 
@@ -97,7 +103,8 @@ public final class WebSystemContextMx {
      *     the name of the ServletContext attribute to look for.
      * @return the desired WebSystemContext for this web app, or {@code null} if none.
      */
-    public static WebSystemContext getWebSystemContext(ServletContext servletContext, String attributeName) {
+    @Nullable
+    public static WebSystemContext getWebSystemContext(@Nonnull ServletContext servletContext, @Nonnull String attributeName) {
         Object attribute = servletContext.getAttribute(attributeName);
         if (attribute == null) {
             return null;
@@ -128,7 +135,8 @@ public final class WebSystemContextMx {
      * @see #getWebSystemContext(ServletContext)
      * @see ServletContext#getAttributeNames()
      */
-    public static WebSystemContext findWebSystemContext(ServletContext servletContext) {
+    @Nullable
+    public static WebSystemContext findWebSystemContext(@Nonnull ServletContext servletContext) {
         WebSystemContext context = getWebSystemContext(servletContext);
         if (context == null) {
             for (String attributeName : new EnumerationIterable<>(servletContext.getAttributeNames())) {
