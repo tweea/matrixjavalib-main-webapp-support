@@ -36,7 +36,7 @@ public final class WebSystemContextMx {
 
     /**
      * Set the root {@link WebSystemContext} for this web app.
-     * 
+     *
      * @param servletContext
      *     ServletContext to set the web application context for.
      * @param context
@@ -48,7 +48,7 @@ public final class WebSystemContextMx {
 
     /**
      * Set a custom {@link WebSystemContext} for this web app.
-     * 
+     *
      * @param servletContext
      *     ServletContext to set the web application context for.
      * @param attributeName
@@ -64,7 +64,7 @@ public final class WebSystemContextMx {
      * Find the root {@link WebSystemContext} for this web app.<br>
      * Will rethrow an exception that happened on root context startup,
      * to differentiate between a failed context startup and no context at all.
-     * 
+     *
      * @param servletContext
      *     ServletContext to find the web application context for.
      * @return the root WebSystemContext for this web app.
@@ -84,7 +84,7 @@ public final class WebSystemContextMx {
      * Find the root {@link WebSystemContext} for this web app.<br>
      * Will rethrow an exception that happened on root context startup,
      * to differentiate between a failed context startup and no context at all.
-     * 
+     *
      * @param servletContext
      *     ServletContext to find the web application context for.
      * @return the root WebSystemContext for this web app, or {@code null} if none.
@@ -96,7 +96,7 @@ public final class WebSystemContextMx {
 
     /**
      * Find a custom {@link WebSystemContext} for this web app.
-     * 
+     *
      * @param servletContext
      *     ServletContext to find the web application context for.
      * @param attributeName
@@ -128,7 +128,7 @@ public final class WebSystemContextMx {
      * Find a unique {@link WebSystemContext} for this web app: either the
      * root web app context (preferred) or a unique {@link WebSystemContext}
      * among the registered {@link ServletContext} attributes.
-     * 
+     *
      * @param servletContext
      *     ServletContext to find the web application context for.
      * @return the desired WebSystemContext for this web app, or {@code null} if none.

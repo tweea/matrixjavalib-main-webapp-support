@@ -21,7 +21,7 @@ public class WebSystemResourceLoader
 
     /**
      * Create a new WebSystemResourceLoader.
-     * 
+     *
      * @param servletContext
      *     the ServletContext to load resources with.
      */
