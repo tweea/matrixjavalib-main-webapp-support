@@ -110,14 +110,14 @@ public final class WebSystemContextMx {
         if (attribute == null) {
             return null;
         }
-        if (attribute instanceof RuntimeException) {
-            throw (RuntimeException) attribute;
+        if (attribute instanceof RuntimeException runtimeException) {
+            throw runtimeException;
         }
-        if (attribute instanceof Error) {
-            throw (Error) attribute;
+        if (attribute instanceof Error error) {
+            throw error;
         }
-        if (attribute instanceof Exception) {
-            throw new UncheckedException((Exception) attribute);
+        if (attribute instanceof Exception exception) {
+            throw new UncheckedException(exception);
         }
         if (!(attribute instanceof WebSystemContext)) {
             throw new IllegalStateException(RBMF.format("Context attribute {0} is not of type WebSystemContext", attributeName));
