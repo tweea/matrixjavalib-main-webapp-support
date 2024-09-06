@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.servlet.ServletContext;
+
+import jakarta.servlet.ServletContext;
 
 import org.apache.commons.configuration2.AbstractConfiguration;
 import org.apache.commons.configuration2.CombinedConfiguration;

@@ -5,7 +5,8 @@
 package net.matrix.webapp;
 
 import javax.annotation.Nonnull;
-import javax.servlet.ServletContext;
+
+import jakarta.servlet.ServletContext;
 
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.FileSystemResource;

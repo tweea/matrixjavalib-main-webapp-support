@@ -4,7 +4,7 @@
  */
 package net.matrix.webapp.servlet;
 
-import javax.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextEvent;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockServletContext;

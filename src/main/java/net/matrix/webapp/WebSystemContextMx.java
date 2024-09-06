@@ -7,7 +7,8 @@ package net.matrix.webapp;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
-import javax.servlet.ServletContext;
+
+import jakarta.servlet.ServletContext;
 
 import net.matrix.java.lang.UncheckedException;
 import net.matrix.java.util.EnumerationIterable;

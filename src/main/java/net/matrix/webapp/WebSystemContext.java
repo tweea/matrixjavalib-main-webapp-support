@@ -4,7 +4,7 @@
  */
 package net.matrix.webapp;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 import net.matrix.app.SystemContext;
 
