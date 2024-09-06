@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- 基本属性 - 项目属性 -->
-    <artifactId>mxlib-webapp-support</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <artifactId>mxlib-webapp-support-java11</artifactId>
+    <version>3.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- 基本属性 - 属性 -->
@@ -19,14 +19,14 @@
         <!-- compile -->
         <dependency>
             <groupId>net.sf.matrixjavalib</groupId>
-            <artifactId>mxlib-app-support</artifactId>
-            <version>3.0.0</version>
+            <artifactId>mxlib-app-support-java11</artifactId>
+            <version>3.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.sf.matrixjavalib</groupId>
-            <artifactId>mxlib-web</artifactId>
-            <version>3.0.0</version>
+            <artifactId>mxlib-web-java11</artifactId>
+            <version>3.0.1</version>
             <scope>compile</scope>
         </dependency>
         <!-- provided -->
@@ -64,6 +64,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <!-- Java 11 最高版本 5.3.39 -->
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>5.3.39</version>
