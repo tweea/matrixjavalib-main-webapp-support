@@ -4,7 +4,7 @@
 
     <!-- 基本属性 - 项目属性 -->
     <artifactId>mxlib-webapp-support-java11</artifactId>
-    <version>3.0.1</version>
+    <version>3.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- 基本属性 - 属性 -->
@@ -95,6 +95,6 @@
         <connection>scm:git:https://github.com/tweea/matrixjavalib-main-webapp-support.git</connection>
         <developerConnection>scm:git:https://github.com/tweea/matrixjavalib-main-webapp-support.git</developerConnection>
         <url>https://github.com/tweea/matrixjavalib-main-webapp-support</url>
-        <tag>mxlib-webapp-support-java11-3.0.1</tag>
+        <tag>HEAD</tag>
     </scm>
 </project>
